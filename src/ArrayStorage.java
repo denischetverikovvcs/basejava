@@ -16,7 +16,7 @@ public class ArrayStorage {
                 System.out.println("You didn't enter anything");
                 break;
             }
-            if (storage[i] == null) {
+            {
                 storage[i] = r;
             }
         }
