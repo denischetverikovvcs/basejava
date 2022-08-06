@@ -1,74 +1,64 @@
+import java.util.Arrays;
 
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
-int size=size();
-    public ArrayStorage() {
-    }
+    int size;
 
     void clear() {
-        for (int i = 0; i < this.storage.length - 1; ++i) {
-            if (this.storage[i] != null) {
-                this.storage[i] = null;
-            }
+        for (int i = 0; i <= size; ++i) {
+            storage[i] = null;
         }
     }
 
     void save(Resume r) {
-        for (int i = 0; i <= size()+1; ++i) {
-            if (storage[i] == null) {
-                storage[i] = r;
+        for (int i = 0; i <= size; ++i) {
+            if (r.uuid == null) {
+                System.out.println("You didn't enter anything");
                 break;
             }
-            if (storage[i].uuid == r.uuid) {
-                System.out.println("The same resume exist");
-                break;
+            if (storage[i] == null) {
+                storage[i] = r;
             }
         }
     }
 
     Resume get(String uuid) {
-        int arrayin = 0;
+        int indexForGet = -1;
 
-        for (int i = 0; i < size(); ++i) {
+        for (int i = 0; i <= size; ++i) {
+            indexForGet = indexForGet + 1;
             if (storage[i].uuid == uuid) {
-                arrayin = arrayin + 1;
-                return storage[i];
+                return storage[indexForGet];
             }
-        }
-        if (arrayin == 0) {
-            System.out.println("Not such resume in Array");
+            if (indexForGet == size - 1) {
+                System.out.println("No such Resume in Array");
+                break;
+            }
         }
         return null;
     }
 
     void delete(String uuid) {
-        int j = size();
+        int j = size;
 
         for (int i = 0; i < j; ++i) {
             if (storage[i].uuid == uuid) {
                 storage[i] = storage[j - 1];
                 storage[j - 1] = null;
                 break;
-
             }
         }
     }
 
     Resume[] getAll() {
-        int s = size();
-        Resume[] storageFilled = new Resume[s];
 
-        for (int i = 0; i < s; ++i) {
-            if (storage[i] != null) {
-                storageFilled[i] = storage[i];
-            }
-        }
-        return storageFilled;
+        return Arrays.copyOf(storage, size);
     }
-        int size() {
-        int size = 0;
 
-        for (int i = 0; i < storage.length - 1 && storage[i] != null; ++i) {
+    int size() {
+        size = 0;
+
+        for (int i = 0; i <= size && storage[i] != null; ++i) {
             ++size;
         }
         return size;
