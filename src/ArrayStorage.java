@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.UUID;
 
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
@@ -14,11 +15,10 @@ public class ArrayStorage {
         for (int i = 0; i <= size; ++i) {
             if (r.uuid == null) {
                 System.out.println("You didn't enter anything");
-                break;
             }
-            {
-                storage[i] = r;
-            }
+            storage[size] = r;
+            size++;
+            break;
         }
     }
 
@@ -51,16 +51,10 @@ public class ArrayStorage {
     }
 
     Resume[] getAll() {
-
         return Arrays.copyOf(storage, size);
     }
 
     int size() {
-        size = 0;
-
-        for (int i = 0; i <= size && storage[i] != null; ++i) {
-            ++size;
-        }
         return size;
     }
 }
